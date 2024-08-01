@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
         // 움직이고자 하는 방향을 정규화 * 속도 * dt
         Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
+        rigid.velocity = Vector2.zero;
     }
 
     void LateUpdate()
