@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        gameTime = 10;
+        maxGameTime = 60;
+        gameTime = 0;
     }
 
     void Update()
