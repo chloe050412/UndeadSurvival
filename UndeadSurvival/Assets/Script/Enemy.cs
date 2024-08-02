@@ -59,4 +59,31 @@ public class Enemy : MonoBehaviour
         HP = data.hp;
         maxHP = data.hp;
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Bullet"))
+            return;
+
+        this.HP -= other.GetComponent<Bullet>().damage;
+
+        if (this.HP < 0)
+            Dead();
+        else
+            Attacked();
+    }
+
+    void Dead()
+    {
+        isLive = false;
+        animator.SetBool("Dead", true);
+    }
+
+    void Attacked()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+
+        }
+    }
 }
