@@ -67,23 +67,21 @@ public class Enemy : MonoBehaviour
 
         this.HP -= other.GetComponent<Bullet>().damage;
 
-        if (this.HP < 0)
-            Dead();
-        else
+        if (this.HP > 0)
             Attacked();
+        else
+            Dead();
     }
 
     void Dead()
     {
-        isLive = false;
-        animator.SetBool("Dead", true);
+        gameObject.SetActive(false);
+        //isLive = false;
+        //animator.SetBool("Dead", true);
     }
 
     void Attacked()
     {
-        for (int i = 0; i < 10; i++)
-        {
-
-        }
+        
     }
 }

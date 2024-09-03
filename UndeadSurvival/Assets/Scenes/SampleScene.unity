@@ -691,6 +691,7 @@ Transform:
   - {fileID: 930717948}
   - {fileID: 2045390257}
   - {fileID: 1765569222}
+  - {fileID: 953573686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &617116368
@@ -1005,7 +1006,6 @@ Transform:
   m_Children:
   - {fileID: 2030733014}
   - {fileID: 386028724}
-  - {fileID: 953573686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780673227
@@ -1180,7 +1180,7 @@ Transform:
   m_GameObject: {fileID: 953573685}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13011529, y: -0.22684957, z: -0.07512905}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1205,7 +1205,7 @@ Transform:
   - {fileID: 1719916405}
   - {fileID: 845635459}
   - {fileID: 1047351893}
-  m_Father: {fileID: 675838341}
+  m_Father: {fileID: 617116367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &953573687
 MonoBehaviour:
@@ -14482,6 +14482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765569222}
+  - component: {fileID: 1765569223}
   m_Layer: 0
   m_Name: WeaponManager
   m_TagString: Untagged
@@ -14504,6 +14505,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 617116367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1765569223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765569221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255ef5f805b472e429289d0c19c23621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  prefabID: 1
+  damage: 11
+  count: 2
+  speed: 0
 --- !u!1 &1788170026
 GameObject:
   m_ObjectHideFlags: 0
