@@ -15,20 +15,24 @@ public class Enemy : MonoBehaviour
 
     Animator animator;
     Rigidbody2D rigid;
+    Collider2D col;
     SpriteRenderer spriter;
+    WaitForFixedUpdate wait;
 
     // Start is called before the first frame update
     void Awake()
     {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
         spriter = GetComponent<SpriteRenderer>();
+        wait = new WaitForFixedUpdate();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!isLive) 
+        if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
         Vector2 dirVec = target.position - rigid.position;
@@ -39,7 +43,7 @@ public class Enemy : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isLive) 
+        if (!isLive)
             return;
 
         Vector2 dir = target.position - rigid.position;
@@ -47,9 +51,14 @@ public class Enemy : MonoBehaviour
     }
     void OnEnable()
     {
-        target = GameManager.instance.player.GetComponent<Rigidbody2D>();   
+        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
         HP = maxHP;
+
+        col.enabled = true;
+        rigid.simulated = true;
+        spriter.sortingOrder = 2;
+        animator.SetBool("Dead", false);
     }
 
     public void Init(SpawnData data)
@@ -62,26 +71,38 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Bullet"))
+        if (!other.CompareTag("Bullet") || !isLive)
             return;
 
         this.HP -= other.GetComponent<Bullet>().damage;
+        StartCoroutine(KnockBack());
 
         if (this.HP > 0)
-            Attacked();
+            animator.SetTrigger("Hit");
         else
-            Dead();
+        {
+            isLive = false;
+            col.enabled = false; // 콜라이더 종료
+            rigid.simulated = false; // 시뮬레이션 종료
+            spriter.sortingOrder = 1;
+            animator.SetBool("Dead", true);
+            GameManager.instance.killCount++;
+            GameManager.instance.GetEXP();
+        }
+
     }
 
     void Dead()
     {
         gameObject.SetActive(false);
-        //isLive = false;
-        //animator.SetBool("Dead", true);
     }
 
-    void Attacked()
+    IEnumerator KnockBack()
     {
-        
+        yield return wait; // 다음 하나의 물리 프레임 딜레이
+
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 dirVec = transform.position - playerPos;
+        rigid.AddForce(dirVec.normalized * 10, ForceMode2D.Impulse);
     }
 }

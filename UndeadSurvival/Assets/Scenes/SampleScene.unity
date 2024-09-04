@@ -822,6 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputVec: {x: 0, y: 0}
   speed: 10
+  scanner: {fileID: 0}
 --- !u!114 &617116371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19036,6 +19037,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameTime: 0
   maxGameTime: 30
+  LV: 0
+  killCount: 0
+  EXP: 0
+  nextEXP: 03000000050000000a000000
   PM: {fileID: 386028725}
   player: {fileID: 617116370}
 --- !u!4 &2030733014
